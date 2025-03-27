@@ -1,6 +1,6 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
-
+import * as crypto from 'crypto'; 
 export const getDatabaseConfig = (
   configService: ConfigService,
 ): TypeOrmModuleOptions => ({
