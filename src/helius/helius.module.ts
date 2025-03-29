@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
+import { HeliusService } from './helius.service';
+import { HeliusController } from './helius.controller';
 
 @Module({
-  imports: [],
-  controllers: [],
-  providers: [],
-  exports: [],
+  controllers: [HeliusController],
+  providers: [HeliusService],
+  exports: [HeliusService],
 })
 export class HeliusModule {}
