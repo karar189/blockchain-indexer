@@ -7,6 +7,7 @@ import { UserModule } from './user/user.module';
 import { HeliusModule } from './helius/helius.module';
 import { IndexerModule } from './indexer/indexer.module';
 import { WebhookModule } from './webhook/webhook.module';
+import { DatabaseModule } from './database/database.module'; 
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { WebhookModule } from './webhook/webhook.module';
     }),
     AuthModule,
     UserModule,
+    DatabaseModule,
     HeliusModule,
     IndexerModule,
     WebhookModule,
