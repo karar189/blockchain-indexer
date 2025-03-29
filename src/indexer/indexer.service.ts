@@ -222,43 +222,42 @@ export class IndexerService {
     }
   }
 
-  private async setupWebhook(indexer: Indexer): Promise<void> {
-    try {
-      console.log('Using temporary webhook ID for testing');
-      indexer.webhookId = 'dev-test-' + Date.now();
-      
 
-      await this.indexerRepository.save(indexer);
-      
-      return; // Skip the rest of the method
-      
-      // The following code is commented out temporarily
-      /*
-      // Determine what addresses to track based on the indexer configuration
-      const accountAddresses = this.getAccountAddressesFromConfig(indexer.configuration);
-      
-      // Determine what transaction types to track
-      const transactionTypes = this.getTransactionTypesForCategory(indexer.category);
-      
-      // Generate a webhook URL
-      const baseUrl = this.configService.get<string>('APP_URL') || 'http://localhost:3000';
-      const webhookUrl = `${baseUrl}/webhook`;
-      
-      // Register the webhook with Helius
-      const webhookResponse = await this.heliusService.registerWebhook(
-        webhookUrl,
-        accountAddresses,
-        transactionTypes
-      );
-      
-      // Save the webhook ID
-      indexer.webhookId = webhookResponse.webhookID;
-      await this.indexerRepository.save(indexer);
-      */
-    } catch (error) {
-      throw new Error(`Failed to set up webhook: ${error.message}`);
-    }
+private async setupWebhook(indexer: Indexer): Promise<void> {
+  try {
+    // Determine what addresses to track based on the indexer configuration
+    const accountAddresses = this.getAccountAddressesFromConfig(indexer.configuration);
+    
+    console.log('Account addresses to track:', accountAddresses);
+    
+    // Determine what transaction types to track
+    const transactionTypes = this.getTransactionTypesForCategory(indexer.category);
+    
+    console.log('Transaction types to track:', transactionTypes);
+    
+    // Generate a webhook URL
+    const baseUrl = this.configService.get<string>('APP_URL') || 'http://localhost:3000';
+    const webhookUrl = `${baseUrl}/webhook`;
+    
+    console.log('Webhook URL:', webhookUrl);
+    
+    // Register the webhook with Helius
+    const webhookResponse = await this.heliusService.registerWebhook(
+      webhookUrl,
+      accountAddresses,
+      transactionTypes
+    );
+    
+    // Save the webhook ID
+    indexer.webhookId = webhookResponse.webhookID;
+    await this.indexerRepository.save(indexer);
+  } catch (error) {
+    console.error('Full webhook registration error:', error);
+    throw new Error(`Failed to set up webhook: ${error.message}`);
   }
+}
+
+
   private async updateWebhook(indexer: Indexer, newConfiguration: any): Promise<void> {
     try {
       if (!indexer.webhookId) {
