@@ -198,7 +198,7 @@ export class IndexerService {
         if (transformedData.length === 0) {
           continue;
         }
-
+  
         const client = await this.databaseConnectorService.getClient(indexer.databaseConnection);
         
         await this.databaseConnectorService.insertData(
@@ -207,10 +207,22 @@ export class IndexerService {
           transformedData
         );
         
+        // Get the current indexer to ensure we have the latest eventsProcessed count
+        const currentIndexer = await this.indexerRepository.findOne({
+          where: { id: indexer.id }
+        });
+        
+        // Calculate the new count, ensuring it starts from 0 if null/undefined
+        const currentCount = currentIndexer.eventsProcessed || 0;
+        const newCount = currentCount + transformedData.length;
+        
+        // Update with the explicit new count
         await this.indexerRepository.update(indexer.id, {
-          eventsProcessed: () => `"eventsProcessed" + ${transformedData.length}`,
+          eventsProcessed: newCount,
           lastProcessedAt: new Date(),
         });
+        
+        this.logger.log(`Updated indexer ${indexer.id}: processed ${transformedData.length} events, new total: ${newCount}`);
       } catch (error) {
         this.logger.error(`Error processing webhook for indexer ${indexer.id}: ${error.message}`);
         
