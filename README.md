@@ -1,32 +1,36 @@
-# CosmoDEX - Blockchain Indexing Platform
+# 🚀 CosmoDEX - Blockchain Indexing Platform
 ![IMAGE 2025-03-30 17:34:10](https://github.com/user-attachments/assets/c7662d83-814a-4e35-840f-16796da628d2)
 
 A powerful platform for indexing Solana blockchain data using Helius API and storing it in your own PostgreSQL database.
 
-## Overview
+## 📺 Product Walkthrough
+[![CosmoDEX Walkthrough Video](https://img.youtube.com/vi/y5m2_vk0wHc/0.jpg)](https://youtu.be/y5m2_vk0wHc?si=W1YtZeiVMV84rFsF)
+
+*Click the image above to watch our walkthrough video*
+
+## 🔎 Overview
 
 This platform allows developers to easily set up and manage Solana blockchain indexers using the Helius API and their own PostgreSQL database. The system provides a comprehensive set of features for configuring, monitoring, and managing blockchain data indexing in a user-friendly way through Helius API.
+
 ![IMAGE 2025-03-30 17:34:27](https://github.com/user-attachments/assets/571ec88c-2f10-48a9-9540-d1d5aa8924c7)
 
+## ✨ Features
 
+- **🔐 User Authentication**: Secure registration and login system
+- **🗄️ Database Management**: Connect and manage your PostgreSQL databases
+- **⚙️ Indexer Configuration**: Create custom indexers with specific filters and transformations
+- **🔗 Helius Integration**: Seamless connection to Solana blockchain via Helius API
+- **⚡ Real-time Indexing**: Process blockchain data as it happens
+- **🔄 Customizable Transformations**: Define how data should be structured in your database
+- **📊 Dashboard & Monitoring**: Track performance and troubleshoot issues
 
-## Features
-
-- **User Authentication**: Secure registration and login system
-- **Database Management**: Connect and manage your PostgreSQL databases
-- **Indexer Configuration**: Create custom indexers with specific filters and transformations
-- **Helius Integration**: Seamless connection to Solana blockchain via Helius API
-- **Real-time Indexing**: Process blockchain data as it happens
-- **Customizable Transformations**: Define how data should be structured in your database
-- **Dashboard & Monitoring**: Track performance and troubleshoot issues
-
-## Installation
+## 📋 Installation
 
 ### Prerequisites
 
-- Node.js (v14 or higher)
-- PostgreSQL (v12 or higher)
-- Helius API key (sign up at [https://helius.xyz](https://helius.xyz))
+- 📦 Node.js (v14 or higher)
+- 🐘 PostgreSQL (v12 or higher)
+- 🔑 Helius API key (sign up at [https://helius.xyz](https://helius.xyz))
 
 ### Backend Setup
 
@@ -91,15 +95,15 @@ Edit the `.env.local` file with your backend API URL.
 npm run dev
 ```
 
-## Quick Start Guide
+## 🚦 Quick Start Guide
 
-1. **Register an account** at `{your-domain}/auth/register`
-2. **Add a database connection** with your PostgreSQL credentials
-3. **Create an indexer** with your desired filters and transformations
-4. **Activate the indexer** to start receiving blockchain data
-5. **Monitor the dashboard** to see your indexed data in action
+1. **👤 Register an account** at `{your-domain}/auth/register`
+2. **🔌 Add a database connection** with your PostgreSQL credentials
+3. **🛠️ Create an indexer** with your desired filters and transformations
+4. **▶️ Activate the indexer** to start receiving blockchain data
+5. **📈 Monitor the dashboard** to see your indexed data in action
 
-## API Documentation
+## 📚 API Documentation
 
 ### Authentication
 
@@ -152,7 +156,7 @@ npm run dev
 |----------|--------|-------------|
 | `/webhook` | POST | Receive incoming webhook data from Helius |
 
-## Example Usage
+## 💻 Example Usage
 
 ### Creating a Database Connection
 
@@ -224,7 +228,7 @@ const data = await response.json();
 console.log('Indexer created:', data);
 ```
 
-## Project Structure
+## 🏗️ Project Structure
 
 ```
 blockchain-indexer/
@@ -247,7 +251,7 @@ blockchain-indexer/
 └── ...
 ```
 
-## Development
+## 👨‍💻 Development
 
 ### Setting Up the Development Environment
 
@@ -270,7 +274,7 @@ cd frontend
 npm run test
 ```
 
-## Contributing
+## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
@@ -280,17 +284,17 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## License
+## 📜 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Acknowledgments
+## 🙏 Acknowledgments
 
 - [Helius](https://helius.xyz) - For their powerful Solana blockchain API
 - [NestJS](https://nestjs.com) - For the backend framework
 - [Next.js](https://nextjs.org) - For the frontend framework
 - All contributors who have helped shape this project
 
-## Contact
+## 📬 Contact
 
 For any questions or support, please open an issue or contact the maintainers at [Sweta Karar](mailto:kararsweta@gmail.com).
