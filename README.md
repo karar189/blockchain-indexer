@@ -14,6 +14,7 @@ This platform allows developers to easily set up and manage Solana blockchain in
 
 ![IMAGE 2025-03-30 17:34:27](https://github.com/user-attachments/assets/571ec88c-2f10-48a9-9540-d1d5aa8924c7)
 
+## 🖋️ Hosted Link: [https://soumiks-organization.gitbook.io/galaxydb/](https://indexer-fe.vercel.app/)
 ## 🖋️ API Docs: https://soumiks-organization.gitbook.io/galaxydb/
 
 ## ✨ Features
