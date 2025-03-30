@@ -1,99 +1,296 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# CosmoDEX - Blockchain Indexing Platform
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+![CosmoDEX Logo](https://raw.githubusercontent.com/yourusername/blockchain-indexing-platform/main/assets/cosmodex-logo.png)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+A powerful platform for indexing Solana blockchain data using Helius API and storing it in your own PostgreSQL database.
 
-## Description
+## Overview
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This platform allows developers to easily set up and manage Solana blockchain indexers using the Helius API and their own PostgreSQL database. The system provides a comprehensive set of features for configuring, monitoring, and managing blockchain data indexing in a user-friendly way.
 
-## Project setup
+![CosmoDEX Architecture](https://raw.githubusercontent.com/yourusername/blockchain-indexing-platform/main/assets/cosmodex-architecture.png)
 
-```bash
-$ npm install
-```
+## Features
 
-## Compile and run the project
+- **User Authentication**: Secure registration and login system
+- **Database Management**: Connect and manage your PostgreSQL databases
+- **Indexer Configuration**: Create custom indexers with specific filters and transformations
+- **Helius Integration**: Seamless connection to Solana blockchain via Helius API
+- **Real-time Indexing**: Process blockchain data as it happens
+- **Customizable Transformations**: Define how data should be structured in your database
+- **Dashboard & Monitoring**: Track performance and troubleshoot issues
+
+## Installation
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- PostgreSQL (v12 or higher)
+- Helius API key (sign up at [https://helius.xyz](https://helius.xyz))
+
+### Backend Setup
+
+1. Clone the repository:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+git clone https://github.com/yourusername/blockchain-indexing-platform.git
+cd blockchain-indexing-platform/backend
 ```
 
-## Run tests
+2. Install dependencies:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm install
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+3. Set up environment variables:
 
 ```bash
-$ npm install -g mau
-$ mau deploy
+cp .env.example .env
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Edit the `.env` file with your database and Helius API credentials.
 
-## Resources
+4. Run migrations:
 
-Check out a few resources that may come in handy when working with NestJS:
+```bash
+npm run migration:run
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+5. Start the server:
 
-## Support
+```bash
+npm run start:dev
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### Frontend Setup
 
-## Stay in touch
+1. Navigate to the frontend directory:
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash
+cd ../frontend
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Set up environment variables:
+
+```bash
+cp .env.example .env.local
+```
+
+Edit the `.env.local` file with your backend API URL.
+
+4. Start the development server:
+
+```bash
+npm run dev
+```
+
+## Quick Start Guide
+
+1. **Register an account** at `{your-domain}/auth/register`
+2. **Add a database connection** with your PostgreSQL credentials
+3. **Create an indexer** with your desired filters and transformations
+4. **Activate the indexer** to start receiving blockchain data
+5. **Monitor the dashboard** to see your indexed data in action
+
+## API Documentation
+
+### Authentication
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/auth/register` | POST | Create a new user account |
+| `/auth/login` | POST | Authenticate and receive a JWT token |
+| `/auth/profile` | GET | Get the current user's profile |
+
+### Database Connections
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/database` | GET | List all database connections |
+| `/database` | POST | Create a new database connection |
+| `/database/test` | POST | Test database connection credentials |
+| `/database/{id}` | GET | Get a specific database connection |
+| `/database/{id}` | PATCH | Update a database connection |
+| `/database/{id}` | DELETE | Delete a database connection |
+
+### Indexers
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/indexer` | GET | List all indexers |
+| `/indexer` | POST | Create a new indexer |
+| `/indexer/{id}` | GET | Get a specific indexer |
+| `/indexer/{id}` | PATCH | Update an indexer |
+| `/indexer/{id}` | DELETE | Delete an indexer |
+| `/indexer/{id}/activate` | POST | Activate an indexer |
+| `/indexer/{id}/deactivate` | POST | Deactivate an indexer |
+| `/indexer/stats` | GET | Get overall indexing statistics |
+| `/indexer/{id}/metrics` | GET | Get metrics for a specific indexer |
+| `/indexer/{id}/logs` | GET | Get logs for a specific indexer |
+
+### Helius Integration
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/helius/webhooks` | GET | List all Helius webhooks |
+| `/helius/webhook` | POST | Create a new Helius webhook |
+| `/helius/webhook/{id}` | GET | Get a specific webhook |
+| `/helius/webhook/{id}` | PUT | Update a webhook |
+| `/helius/webhook/{id}` | DELETE | Delete a webhook |
+| `/helius/nft/metadata` | POST | Get enhanced NFT metadata |
+
+### Webhook Reception
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/webhook` | POST | Receive incoming webhook data from Helius |
+
+## Example Usage
+
+### Creating a Database Connection
+
+```javascript
+const response = await fetch('https://your-api.com/database', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  },
+  body: JSON.stringify({
+    name: 'Production Database',
+    host: 'db.example.com',
+    port: 5432,
+    username: 'dbuser',
+    password: 'dbpassword',
+    database: 'blockchain_data'
+  })
+});
+
+const data = await response.json();
+console.log('Database connection created:', data);
+```
+
+### Creating an Indexer for NFT Transactions
+
+```javascript
+const response = await fetch('https://your-api.com/indexer', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  },
+  body: JSON.stringify({
+    name: 'NFT Transactions Indexer',
+    description: 'Indexes all NFT transactions on Solana',
+    databaseConnectionId: 'db-connection-uuid-1',
+    schemaName: 'nft_data',
+    filters: {
+      programIds: [
+        'metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s'
+      ],
+      transactionTypes: ['NFT_SALE']
+    },
+    transformations: {
+      includeMetadata: true,
+      customFields: [
+        {
+          name: 'seller_address',
+          path: 'events[0].source',
+          type: 'string'
+        },
+        {
+          name: 'buyer_address',
+          path: 'events[0].destination',
+          type: 'string'
+        },
+        {
+          name: 'sale_amount',
+          path: 'events[0].amount',
+          type: 'numeric'
+        }
+      ]
+    }
+  })
+});
+
+const data = await response.json();
+console.log('Indexer created:', data);
+```
+
+## Project Structure
+
+```
+blockchain-indexer/
+├── backend/
+│   ├── src/
+│   │   ├── auth/              # Authentication module
+│   │   ├── database/          # Database connection management
+│   │   ├── helius/            # Helius API integration
+│   │   ├── indexer/           # Core indexing logic
+│   │   ├── webhook/           # Webhook processing
+│   │   └── main.ts            # Application entry point
+│   └── ...
+├── frontend/
+│   ├── src/
+│   │   ├── components/        # React components
+│   │   ├── pages/             # Next.js page components
+│   │   ├── services/          # API service integrations
+│   │   └── ...
+│   └── ...
+└── ...
+```
+
+## Development
+
+### Setting Up the Development Environment
+
+1. Fork and clone the repository
+2. Set up the backend and frontend as described in the installation section
+3. Create a new branch for your feature or bug fix
+4. Make your changes
+5. Run tests to ensure everything works correctly
+6. Submit a pull request
+
+### Running Tests
+
+```bash
+# Backend tests
+cd backend
+npm run test
+
+# Frontend tests
+cd frontend
+npm run test
+```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- [Helius](https://helius.xyz) - For their powerful Solana blockchain API
+- [NestJS](https://nestjs.com) - For the backend framework
+- [Next.js](https://nextjs.org) - For the frontend framework
+- All contributors who have helped shape this project
+
+## Contact
+
+For any questions or support, please open an issue or contact the maintainers at [your-email@example.com](mailto:your-email@example.com).
