@@ -126,39 +126,88 @@ export class DataTransformerService {
   }
 
   private transformTokenPrices(webhookData: any, configuration: any): any[] {
+    // Look for any events with token balance changes
     const relevantEvents = webhookData.filter(event => {
-      if (!['SWAP', 'TRADE', 'PRICE_UPDATE'].includes(event.type)) return false;
+      // Check if this is a token-related event with balance changes
+      const hasTokenData = event.accountData && 
+                           event.accountData.some(acc => 
+                             acc.tokenBalanceChanges && 
+                             acc.tokenBalanceChanges.length > 0);
+      
+      // If we have tokens configured, check if any match
       if (configuration.tokens && configuration.tokens.length > 0) {
-        const tokenAddress = event.events?.token?.mint || 
-                            event.events?.swap?.inputMint || 
-                            event.events?.swap?.outputMint;
-        return configuration.tokens.includes(tokenAddress);
+        // Extract token addresses from the event
+        const tokenAddresses = [];
+        
+        // From accountData with tokenBalanceChanges
+        if (event.accountData) {
+          event.accountData.forEach(acc => {
+            if (acc.tokenBalanceChanges) {
+              acc.tokenBalanceChanges.forEach(change => {
+                if (change.mint) tokenAddresses.push(change.mint);
+              });
+            }
+          });
+        }
+        
+        // From native format
+        if (event.events?.token?.mint) {
+          tokenAddresses.push(event.events.token.mint);
+        }
+        
+        // Check if any configured token matches
+        return tokenAddresses.some(addr => configuration.tokens.includes(addr));
       }
       
-      if (configuration.platforms && configuration.platforms.length > 0) {
-        const platform = event.events?.swap?.platform || event.events?.trade?.platform;
-        return configuration.platforms.includes(platform);
-      }
-      
-      return true;
+      // If we don't have specific tokens configured, just check if it's a token event
+      return hasTokenData;
     });
-
+  
+    this.logger.debug(`Found ${relevantEvents.length} relevant events out of ${webhookData.length} total`);
+  
     return relevantEvents.map(event => {
-      const tokenInfo = event.events?.token || {};
-      const swapInfo = event.events?.swap || {};
-      const tradeInfo = event.events?.trade || {};
-      const tokenAddress = tokenInfo.mint || swapInfo.inputMint || swapInfo.outputMint;
-      const priceInfo = tokenInfo.price || swapInfo.price || tradeInfo.price || {};
+      // Extract the most relevant token data
+      let tokenAddress = null;
+      let nativeChange = null;
+      
+      // Try to find the configured token in the event
+      if (configuration.tokens && configuration.tokens.length > 0) {
+        if (event.accountData) {
+          for (const acc of event.accountData) {
+            if (acc.tokenBalanceChanges) {
+              for (const change of acc.tokenBalanceChanges) {
+                if (configuration.tokens.includes(change.mint)) {
+                  tokenAddress = change.mint;
+                  nativeChange = change.nativeBalanceChange;
+                  break;
+                }
+              }
+              if (tokenAddress) break;
+            }
+          }
+        }
+      }
+      
+      // If we didn't find a configured token, just use the first one
+      if (!tokenAddress && event.accountData) {
+        for (const acc of event.accountData) {
+          if (acc.tokenBalanceChanges && acc.tokenBalanceChanges.length > 0) {
+            tokenAddress = acc.tokenBalanceChanges[0].mint;
+            nativeChange = acc.tokenBalanceChanges[0].nativeBalanceChange;
+            break;
+          }
+        }
+      }
       
       return {
         id: uuidv4(),
-        transaction_signature: event.signature,
+        transaction_signature: event.signature || event.txSignature,
         block_time: new Date(event.timestamp * 1000),
-        token_address: tokenAddress,
-        price_usd: priceInfo.usd || null,
-        platform: swapInfo.platform || tradeInfo.platform || 'unknown',
-        volume_24h: tokenInfo.volume24h || null,
-        liquidity: tokenInfo.liquidity || null,
+        token_address: tokenAddress || 'unknown',
+        price_usd: null, // We don't have direct price data
+        platform: event.source || 'unknown',
+        volume_24h: null,
+        liquidity: null,
         created_at: new Date(),
       };
     });
