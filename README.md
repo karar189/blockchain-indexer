@@ -1,16 +1,14 @@
 # CosmoDEX - Blockchain Indexing Platform
-
-![CosmoDEX Logo](![image](https://github.com/user-attachments/assets/a50f8d2b-f28b-4d60-8165-4a17ea8838ce)
-)
+![IMAGE 2025-03-30 17:34:10](https://github.com/user-attachments/assets/c7662d83-814a-4e35-840f-16796da628d2)
 
 A powerful platform for indexing Solana blockchain data using Helius API and storing it in your own PostgreSQL database.
 
 ## Overview
 
 This platform allows developers to easily set up and manage Solana blockchain indexers using the Helius API and their own PostgreSQL database. The system provides a comprehensive set of features for configuring, monitoring, and managing blockchain data indexing in a user-friendly way through Helius API.
+![IMAGE 2025-03-30 17:34:27](https://github.com/user-attachments/assets/571ec88c-2f10-48a9-9540-d1d5aa8924c7)
 
-![CosmoDEX Architecture](![image](https://github.com/user-attachments/assets/68a0d4a7-30a2-4430-85b4-a0a0dcde336b)
-)
+
 
 ## Features
 
@@ -295,4 +293,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Contact
 
-For any questions or support, please open an issue or contact the maintainers at [your-email@example.com](mailto:your-email@example.com).
+For any questions or support, please open an issue or contact the maintainers at [Sweta Karar](mailto:kararsweta@gmail.com).
